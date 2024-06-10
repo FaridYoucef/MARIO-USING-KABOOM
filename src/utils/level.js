@@ -1,67 +1,61 @@
+export class Level {
+  constructor() {
 
-export class level {
-  drawMaps() {
-    this.maps = {
-      map1: [
-        "                                        ",
-        "                                        ",
-        "                                        ",
-        "                                        ",
-        "                                        ",
-        "    %    %=*=%                           ",
-        "                               -+        ",
-        "     ;     ^    ^              ()       ",
-        "=================================   =====",
-      ],
-      map2: [
-        "£                                      £",
-        "£                                      £",
-        "£                                      £",
-        "£                                      £",
-        "£        @@@@@              x x        £",
-        "£                         x x x        £",
-        "£                       x x x x   x  -+£",
-        "£          z     z    x x x x x   x  ()£",
-        "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
-      ],
-    };
+    this.maps = [
+      [
+       "                                        ",
+       "                                        ",
+       "                                        ",
+       "                                        ",
+       "                                        ",
+       "    %    %=*=%                           ",
+       "                               -+        ",
+       "     ;     ^    ^              ()       ",
+       "=================================   =====",
+     ],
+      [
+       "£                                      £",
+       "£                                      £",
+       "£                                      £",
+       "£                                      £",
+       "£        @@@@@              x x        £",
+       "£                         x x x        £",
+       "£                       x x x x   x  -+£",
+       "£          z     z    x x x x x   x  ()£",
+       "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+     ],
+   ]
+     
 
-    this.levelConfigs = {
-      levelCfg1: {
-        tileWidth: 20,
-        tileHeight: 20,
-
-        tiles: {
-          "=": () => [sprite("brick"), area(), ],
-          "%": () => [sprite("surprise")],
-          "*": () => [sprite("coin"), "coin"],
-          "^": () => [sprite("evil-shroom"), scale(1), "coin"],
-          "-": () => [sprite("pipe-top-left"), scale(0.5)],
-          "+": () => [sprite("pipe-top-right"), scale(0.5)],
-          "(": () => [sprite("pipe-bottom-left"), scale(0.5)],
-          ")": () => [sprite("pipe-bottom-right"), scale(0.5)],
-        },
-      },
-      levelCfg2: {
-        tileWidth: 20,
-        tileHeight: 20,
-        scale: 2,
-        tiles: {
-          "£": () => [sprite("blue-brick"), scale(0.5)],
-          "!": () => [sprite("blue-block"), scale(0.5)],
-          "@": () => [sprite("blue-surprise"), scale(0.5)],
-          "z": () => [sprite("blue-evil-mushroom"), scale(0.5)],
-          "z": () => [sprite("blue-steel"), scale(0.5)],
-        },
-      },
-    };
+     this.levelCfg = {
+         tileWidth: 20,
+         tileHeight: 20,
+   
+         tiles: {
+           "=": () => [sprite("brick"),pos(0, 150), area(), body({ isStatic: true })],
+           "%": () => [sprite("surprise"), pos(0, 150), area(), body({ isStatic: true }), "ground"],
+           "#": () => [sprite("mushroom"), pos(0, 150), area(), body({ isStatic: true }), "mushroom"],
+           "*": () => [sprite("coin"), pos(0, 150),  area(),body({ isStatic: true }), "coin"],
+           "}": () => [sprite("unboxed"), pos(0, 150),  area(),body({ isStatic: true })],
+           "^": () => [sprite("evil-shroom"), pos(0, 150), scale(1),area(),body({ isStatic: true }), "dangrous",],
+           "-": () => [sprite("pipe-top-left"),pos(0, 150),scale(0.5),area(),body({ isStatic: true }),"ground",],
+           "+": () => [sprite("pipe-top-right"),pos(0, 150),scale(0.5),area(),body({ isStatic: true }),"ground",],
+           "(": () => [ sprite("pipe-bottom-left"),pos(0, 150),scale(0.5),area(),body({ isStatic: true }),"ground",],
+           ")": () => [sprite("pipe-bottom-right"),pos(0, 150),scale(0.5),area(),body({ isStatic: true }),"ground",],
+           "£": () => [sprite("blue-brick"), scale(0.5), pos(0, 150), area(), body({ isStatic: true }), "ground"],
+           "!": () => [sprite("blue-block"), scale(0.5), pos(0, 150), area(), body({ isStatic: true }), "ground"],
+           "@": () => [sprite("blue-surprise"),scale(0.5),pos(0, 150), area(), body({ isStatic: true }),"coin-sueprise",],
+           'z': () => [sprite("blue-evil-mushroom"),scale(0.5),  pos(0, 150), area(), body({ isStatic: true }),"dangerous"],
+           'x': () => [sprite("blue-steel"), scale(0.5), pos(0, 150), area(), body({ isStatic: true })],
+         }
+     }
+  
   }
-
-  getMap(name) {
-    return this.maps[name];
-  }
-
-  getConfig(name) {
-    return this.levelConfigs[name];
-  }
+    getMap(level) {
+      return this.maps[level]
+    }
+    
+    getLevelConfig() {
+      return this.levelCfg
+    }
 }

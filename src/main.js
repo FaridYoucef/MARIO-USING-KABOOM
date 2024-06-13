@@ -29,7 +29,8 @@ const gameLevel = addLevel(map, {
   ...levelCfg,
 });
 
-
+// Add the player
+addMario()
  // Render the score lable
  add([text("Score: 0"), pos(24, 24), { value: 0 }]);
  

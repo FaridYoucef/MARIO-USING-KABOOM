@@ -1,4 +1,4 @@
-export function addMario(currentLevel) {
+export function addMario(currentLevel, updateScore) {
   let moveSpeed = 150;
   let jumpForce = 400;
   let currentJumpForce = jumpForce; // This ensures that Mario has a defined jump force
@@ -79,6 +79,7 @@ export function addMario(currentLevel) {
     //Destroy coins
     mario.onCollide("coin", (c) => {
       destroy(c);
+      updateScore(1);
     });
   });
 

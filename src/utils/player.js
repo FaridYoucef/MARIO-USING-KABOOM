@@ -15,10 +15,6 @@ export function addMario(currentLevel) {
   //Gravity
   setGravity(1400);
 
-  // Destroy enemies
-  mario.onCollide("dangrous", (d) => {
-    destroy(d);
-  });
   // Move Mario
   onKeyDown("left", () => {
     mario.move(-moveSpeed, 0);
@@ -45,7 +41,7 @@ export function addMario(currentLevel) {
   // Moving Mario between levels
   mario.onCollide("pipe", () => {
     onKeyPress("down", () => {
-      go("game", currentLevel + 1 )
+      go("game", currentLevel + 1);
     });
   });
 
@@ -74,17 +70,29 @@ export function addMario(currentLevel) {
     }
   });
 
-  // Moving enemies 
+  // Coins logic
+  mario.onCollide("coin-surprise", (obj) => {
+    const coinPos = obj.pos.sub(0, obj.height);
+    add([sprite("coin"), pos(coinPos), area(), body(), "coin"]);
+    obj.use(sprite("unboxed"));
+
+    //Destroy coins
+    mario.onCollide("coin", (c) => {
+      destroy(c);
+    });
+  });
+
+  // Moving enemies
   onUpdate("dangrous", (d) => {
     d.move(-enemySpeed, 0);
   });
 
   // Destroying enemies
   mario.onCollide("dangrous", (d) => {
-    if(mario.vel.y > 0){
+    if (mario.vel.y > 0) {
       destroy(d);
-    }else{
-      go("lose")
+    } else {
+      go("lose");
     }
   });
 

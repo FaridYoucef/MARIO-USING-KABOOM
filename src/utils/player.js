@@ -1,4 +1,4 @@
-export function addMario() {
+export function addMario(currentLevel) {
   let moveSpeed = 150;
   let jumpForce = 400;
   let currentJumpForce = jumpForce; // This ensures that Mario has a defined jump force
@@ -40,6 +40,13 @@ export function addMario() {
     if (mario.pos.y >= 400) {
       go("lose");
     }
+  });
+
+  // Moving Mario between levels
+  mario.onCollide("pipe", () => {
+    onKeyPress("down", () => {
+      go("game", currentLevel + 1 )
+    });
   });
 
   //Mushroom logic

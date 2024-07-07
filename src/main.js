@@ -17,11 +17,11 @@ load.assets();
 
 
 
-scene("game", () => {
+scene("game", (level) => {
 
     // Add level
-    const map = levelManager.getMap(); // Change to 1 for the second map
-    const levelCfg = levelManager.getLevelConfig();
+    const map = levelManager.getMap(level); 
+    const levelCfg = levelManager.getLevelConfig(0);
 
     const gameLevel = addLevel(map, {
       width: levelCfg.tileWidth,
@@ -30,7 +30,7 @@ scene("game", () => {
     });
 
     // Add the player
-    addMario()
+    addMario(level)
 
     // Render the score lable
     let score = 0;

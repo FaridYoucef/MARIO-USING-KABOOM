@@ -66,6 +66,20 @@ export function addMario() {
       });
     }
   });
-  
+
+  // Moving enemies 
+  onUpdate("dangrous", (d) => {
+    d.move(-enemySpeed, 0);
+  });
+
+  // Destroying enemies
+  mario.onCollide("dangrous", (d) => {
+    if(mario.vel.y > 0){
+      destroy(d);
+    }else{
+      go("lose")
+    }
+  });
+
   return mario;
 }

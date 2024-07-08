@@ -17,7 +17,7 @@ load.assets();
 
 
 
-scene("game", (level, ) => {
+scene("game", (level)  => {
 
     // Add level
     const map = levelManager.getMap(level); 
@@ -35,17 +35,17 @@ scene("game", (level, ) => {
     // Render the score lable
     let score = 0;
     
-    const scoreLable = add([text(`Score:${score}`), pos(24, 24), {value: score} ]);
+    const scoreLable = add([text(`Score:${score}`), pos(12, 12), fixed(), {size: 24}, {value: score} ]);
 
-    function updateScore(points) {
-      score += points;
+    function updateScore() {
+      score++;
       scoreLable.text = `Score:${score}`;
     };
 
 
    // Lose scene
    scene('lose', () => { 
-    add([text('Game Over'), pos(width() / 2, height()/ 2 - 80), scale(2), anchor('center'), layer("ui")])
+    add([text('Game Over'), pos(width() / 2, height()/ 2 - 80), scale(2), anchor('center')])
 })
  
 });

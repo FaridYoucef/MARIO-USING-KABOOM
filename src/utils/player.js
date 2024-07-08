@@ -47,7 +47,8 @@ export function addMario(currentLevel, updateScore) {
 
   //Mushroom logic
   mario.onCollide("mushroom-surprise", (obj) => {
-    if (obj) {
+    if (!obj.hit) {
+      obj.hit = true;
       const mushroomPos = obj.pos.sub(0, obj.height);
       let mushroom = add([
         sprite("mushroom"),
@@ -72,15 +73,18 @@ export function addMario(currentLevel, updateScore) {
 
   // Coins logic
   mario.onCollide("coin-surprise", (obj) => {
-    const coinPos = obj.pos.sub(0, obj.height);
-    add([sprite("coin"), pos(coinPos), area(), body(), "coin"]);
-    obj.use(sprite("unboxed"));
-
-    //Destroy coins
-    mario.onCollide("coin", (c) => {
-      destroy(c);
-      updateScore(1);
-    });
+    if(!obj.hit){
+      obj.hit = true;
+      const coinPos = obj.pos.sub(0, obj.height);
+      add([sprite("coin"), pos(coinPos), area(), body(), "coin"]);
+      obj.use(sprite("unboxed"));
+    }
+  });
+  
+  //Destroy coins
+  mario.onCollide("coin", (c) => {
+    destroy(c);
+    updateScore();
   });
 
   // Moving enemies

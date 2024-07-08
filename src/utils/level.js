@@ -33,8 +33,8 @@ export class Level {
    
          tiles: {
            "=": () => [sprite("brick"),pos(0, 150), area(), body({ isStatic: true }), "solid"],
-           "%": () => [sprite("surprise"), pos(0, 150), area(), body({ isStatic: true }), "coin-surprise"],
-           "$": () => [sprite("surprise"), pos(0, 150), area(), body({ isStatic: true }), "mushroom-surprise"],
+           "%": () => [sprite("surprise"), pos(0, 150), area(), body({ isStatic: true }), "coin-surprise", { hit: false }],
+           "$": () => [sprite("surprise"), pos(0, 150), area(), body({ isStatic: true }), "mushroom-surprise", { hit: false }],
           //  "#": () => [sprite("mushroom"), pos(0, 150), area(), body({ isStatic: true }), "mushroom"],
            "*": () => [sprite("coin"), pos(0, 150),  area(),body({ isStatic: true }), "coin"],
            "}": () => [sprite("unboxed"), pos(0, 150),  area(),body({ isStatic: true })],

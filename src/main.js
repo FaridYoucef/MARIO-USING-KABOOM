@@ -35,7 +35,7 @@ scene("game", (level)  => {
     // Render the score lable
     let score = 0;
     
-    const scoreLable = add([text(`Score:${score}`), pos(12, 12), fixed(), {size: 24}, {value: score} ]);
+    const scoreLable = add([text(`Score:${score}`, {font: "VT323"}), pos(12, 12), fixed(), {size: 24}, {value: score} ]);
 
     function updateScore() {
       score++;
@@ -45,7 +45,8 @@ scene("game", (level)  => {
 
    // Lose scene
    scene('lose', () => { 
-    add([text('Game Over'), pos(width() / 2, height()/ 2 - 80), scale(2), anchor('center')])
+    add([text('Game Over', {font: "VT323"}), pos(width() / 2, height()/ 2 - 80), scale(2), anchor('center')]);
+    add([text(`Score:${score}`, { font: "VT323"}), pos(width() / 2, height() / 2), scale(1.5), anchor("center")]);
 })
  
 });

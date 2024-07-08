@@ -1,15 +1,19 @@
 export function addMario(currentLevel, updateScore) {
   let moveSpeed = 150;
   let jumpForce = 400;
+  let superJump = 700;
   let currentJumpForce = jumpForce; // This ensures that Mario has a defined jump force
-  let enemySpeed = 80;
-  let isJumping = true;
+  let enemySpeed = 30;
+  
+
 
   const mario = add([
     sprite("mario"),
     pos(),
     area(),
     body({ stickToPltform: true }),
+    scale(1),
+    { isBig: false },
   ]);
 
   //Gravity
@@ -25,7 +29,10 @@ export function addMario(currentLevel, updateScore) {
   });
 
   onKeyPress("space", () => {
-    if (mario.isGrounded()) {
+    if (mario.isGrounded() && mario.isBig) {
+      mario.jump(superJump);
+    }else{
+      if(mario.isGrounded())
       mario.jump(currentJumpForce);
     }
   });
@@ -45,6 +52,20 @@ export function addMario(currentLevel, updateScore) {
     });
   });
 
+// Make Mario big
+function MarioIsBig (mario) {
+  const MarioSize = mario.scale;
+  mario.use(scale(1.5));
+  mario.isBig = true;
+
+  wait(8, () => {
+    mario.use(scale(MarioSize));
+    mario.isBig = false;
+  });
+} 
+
+
+
   //Mushroom logic
   mario.onCollide("mushroom-surprise", (obj) => {
     if (!obj.hit) {
@@ -61,26 +82,27 @@ export function addMario(currentLevel, updateScore) {
 
       //Move Mushroom
       mushroom.onUpdate(() => {
-        mushroom.move(70, 0);
+      mushroom.move(70, 0);
       });
 
       //Destroy mushroom
       mario.onCollide("mushroom", (m) => {
         destroy(m);
+        MarioIsBig(mario);
       });
     }
   });
 
   // Coins logic
   mario.onCollide("coin-surprise", (obj) => {
-    if(!obj.hit){
+    if (!obj.hit) {
       obj.hit = true;
       const coinPos = obj.pos.sub(0, obj.height);
       add([sprite("coin"), pos(coinPos), area(), body(), "coin"]);
       obj.use(sprite("unboxed"));
     }
   });
-  
+
   //Destroy coins
   mario.onCollide("coin", (c) => {
     destroy(c);
@@ -94,10 +116,14 @@ export function addMario(currentLevel, updateScore) {
 
   // Destroying enemies
   mario.onCollide("dangrous", (d) => {
-    if (mario.vel.y > 0) {
+    if (mario.isBig) {
       destroy(d);
     } else {
-      go("lose");
+      if (mario.vel.y > 0) {
+        destroy(d);
+      } else {
+        go("lose");
+      }
     }
   });
 

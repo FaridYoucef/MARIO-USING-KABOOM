@@ -7,8 +7,8 @@ import {addMario} from './utils/player'
 
 
 kaboom({
-   scale:1.3,
-   background: [ 0, 0, 255, ],
+   scale:1.5,
+  background: [ 0, 0, 255, ],
 });
 
 const levelManager = new Level();
@@ -47,6 +47,7 @@ scene("game", (level)  => {
    scene('lose', () => { 
     add([text('Game Over', {font: "VT323"}), pos(width() / 2, height()/ 2 - 80), scale(2), anchor('center')]);
     add([text(`Score:${score}`, { font: "VT323"}), pos(width() / 2, height() / 2), scale(1.5), anchor("center")]);
+    play("lose")
 })
  
 });

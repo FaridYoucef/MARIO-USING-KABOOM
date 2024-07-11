@@ -45,8 +45,8 @@ export class Level {
            ")": () => [sprite("pipe-bottom-right"),pos(0, 150),scale(0.5),area(),body({ isStatic: true }),],
            "£": () => [sprite("blue-brick"), scale(0.5), pos(0, 150), area(), body({ isStatic: true }), "ground"],
            "!": () => [sprite("blue-block"), scale(0.5), pos(0, 150), area(), body({ isStatic: true }), "ground"],
-           "@": () => [sprite("blue-surprise"),scale(0.5),pos(0, 150), area(), body({ isStatic: true }),"coin-sueprise",],
-           'z': () => [sprite("blue-evil-mushroom"),scale(0.5),  pos(0, 150), area(), body({ isStatic: true }),"dangerous"],
+           "@": () => [sprite("blue-surprise"),scale(0.5),pos(0, 150), area(), body({ isStatic: true }),"coin-surprise",],
+           'z': () => [sprite("blue-evil-mushroom"),scale(0.5),  pos(0, 150), area(), body({ isStatic: true }),"dangrous"],
            'x': () => [sprite("blue-steel"), scale(0.5), pos(0, 150), area(), body({ isStatic: true }), "solid"],
          }
      }

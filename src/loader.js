@@ -19,6 +19,13 @@ export const load = {
     loadSprite("blue-steel", "./blue-steel.png");
     loadSprite("blue-evil-mushroom", "./blue-evil-mushroom.png");
     loadSprite("blue-surprise", "./blue-surprise.png");
+
+    //Load audio
+
+    loadSound("jump", "jump.wav");
+    loadSound("coin", "coin.ogg");
+    loadSound("power-up", "power-up.mp3");
+    loadSound("lose", "lose.wav");
     
   },
 };

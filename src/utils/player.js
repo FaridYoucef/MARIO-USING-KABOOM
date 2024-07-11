@@ -34,6 +34,7 @@ export function addMario(currentLevel, updateScore) {
     }else{
       if(mario.isGrounded())
       mario.jump(currentJumpForce);
+    play("jump")
     }
   });
 
@@ -89,6 +90,7 @@ function MarioIsBig (mario) {
       mario.onCollide("mushroom", (m) => {
         destroy(m);
         MarioIsBig(mario);
+        play("power-up")
       });
     }
   });
@@ -100,6 +102,7 @@ function MarioIsBig (mario) {
       const coinPos = obj.pos.sub(0, obj.height);
       add([sprite("coin"), pos(coinPos), area(), body(), "coin"]);
       obj.use(sprite("unboxed"));
+      play("coin");
     }
   });
 
@@ -107,6 +110,7 @@ function MarioIsBig (mario) {
   mario.onCollide("coin", (c) => {
     destroy(c);
     updateScore();
+    play("coin");
   });
 
   // Moving enemies

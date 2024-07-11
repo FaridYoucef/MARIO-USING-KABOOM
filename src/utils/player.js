@@ -4,6 +4,7 @@ export function addMario(currentLevel, updateScore) {
   let superJump = 700;
   let currentJumpForce = jumpForce; // This ensures that Mario has a defined jump force
   let enemySpeed = 30;
+  let isJumping = false;
   
 
 
@@ -18,6 +19,11 @@ export function addMario(currentLevel, updateScore) {
 
   //Gravity
   setGravity(1400);
+  
+// Make sure Mario land properlly on the ground
+  mario.onCollide("solid", () => {
+    isJumping = false;
+  })
 
   // Move Mario
   onKeyDown("left", () => {

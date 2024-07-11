@@ -37,17 +37,24 @@ scene("game", (level)  => {
     
     const scoreLable = add([text(`Score:${score}`, {font: "VT323"}), pos(12, 12), fixed(), {size: 24}, {value: score} ]);
 
+    // Update the score
     function updateScore() {
       score++;
       scoreLable.text = `Score:${score}`;
     };
 
-
+    // Background sound
+    const sound = play("background", {
+      volume: 0.5,
+      loop: true,
+    }) 
+ 
    // Lose scene
    scene('lose', () => { 
     add([text('Game Over', {font: "VT323"}), pos(width() / 2, height()/ 2 - 80), scale(2), anchor('center')]);
     add([text(`Score:${score}`, { font: "VT323"}), pos(width() / 2, height() / 2), scale(1.5), anchor("center")]);
-    play("lose")
+    sound.stop();
+    play("die");
 })
  
 });

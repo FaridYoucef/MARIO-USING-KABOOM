@@ -21,11 +21,14 @@ export const load = {
     loadSprite("blue-surprise", "./blue-surprise.png");
 
     //Load audio
-
+    loadSound("background", "background.mp3");
+    
     loadSound("jump", "jump.wav");
     loadSound("coin", "coin.ogg");
+    loadSound("kick", "kick.wav");
     loadSound("power-up", "power-up.mp3");
-    loadSound("lose", "lose.wav");
+    loadSound("level", "level.wav");
+    loadSound("die", "die.wav");
     
   },
 };

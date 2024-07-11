@@ -19,7 +19,7 @@ export function addMario(currentLevel, updateScore) {
 
   //Gravity
   setGravity(1400);
-  
+
 // Make sure Mario land properlly on the ground
   mario.onCollide("solid", () => {
     isJumping = false;
@@ -56,6 +56,7 @@ export function addMario(currentLevel, updateScore) {
   mario.onCollide("pipe", () => {
     onKeyPress("down", () => {
       go("game", currentLevel + 1);
+      play("level");
     });
   });
 
@@ -126,6 +127,7 @@ function MarioIsBig (mario) {
 
   // Destroying enemies
   mario.onCollide("dangrous", (d) => {
+    play("kick")
     if (mario.isBig) {
       destroy(d);
     } else {
